@@ -1,5 +1,7 @@
 package com.school.studentms.dto;
 
+import java.util.Date;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -21,13 +23,13 @@ public class UserDTO {
 
 	private String country;
 
-	@NotEmpty(message = "User role is required")
+	
 	private RoleDTO userRole;
 
-	@NotEmpty(message = "Organization is required")
 	private OrganizationDTO org;
 
 	@NotEmpty(message="Password is required")
 	private String password;
 	
+	private Date createdOn;
 }

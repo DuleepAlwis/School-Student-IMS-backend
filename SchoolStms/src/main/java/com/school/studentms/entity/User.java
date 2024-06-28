@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -38,11 +39,11 @@ public class User implements UserDetails {
 	@Column(name="country")
 	private String country;
 	
-	@Column(name="role")
+	@JoinColumn(name="role")
 	@ManyToOne
 	private Role userRole;
 
-	@Column(name="organization")
+	@JoinColumn(name="organization")
 	@ManyToOne
 	private Organization org;
 

@@ -1,5 +1,7 @@
 package com.school.studentms.dto;
 
+import java.util.Date;
+
 import com.school.studentms.entity.Role;
 
 import jakarta.persistence.Column;
@@ -23,11 +25,6 @@ public class PermissionDTO {
 
 	private Role role;
 
-	@Override
-	public String toString() {
-		return "PermissionDTO [id=" + id + ", permissionName=" + permissionName + ", isActive=" + isActive + ", role="
-				+ role + "]";
-	}
-	
+	private Date createdOn;
 	
 }
