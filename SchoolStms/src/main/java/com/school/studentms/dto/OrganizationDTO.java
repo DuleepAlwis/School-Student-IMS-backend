@@ -1,5 +1,6 @@
 package com.school.studentms.dto;
 
+import java.util.Date;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,12 +26,7 @@ public class OrganizationDTO {
 	
 	private List<UserDTO> users;
 
-	@Override
-	public String toString() {
-		return "OrganizationDTO [id=" + id + ", orgName=" + orgName + ", city=" + city + ", address=" + address
-				+ ", district=" + district + ", orgCode=" + orgCode + ", isActive=" + isActive + ", users=" + users
-				+ "]";
-	}
+	private Date createdOn;
 	
 	
 }

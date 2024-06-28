@@ -1,5 +1,6 @@
 package com.school.studentms.dto;
 
+import java.util.Date;
 import java.util.List;
 
 import com.school.studentms.entity.Permission;
@@ -22,11 +23,6 @@ public class RoleDTO {
 
 	private List<UserDTO> users;
 
-	@Override
-	public String toString() {
-		return "RoleDTO [id=" + id + ", roleName=" + roleName + ", isActive=" + isActive + ", permissions="
-				+ permissions + ", users=" + users + "]";
-	}
-	
+	private Date createdOn;
 	
 }
