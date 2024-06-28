@@ -29,7 +29,7 @@ public class UserDTO {
 	private OrganizationDTO org;
 
 	@NotEmpty(message="Password is required")
-	private String password;
+	private String password; 
 	
 	private Date createdOn;
 }
