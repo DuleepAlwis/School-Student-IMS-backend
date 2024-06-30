@@ -1,7 +1,8 @@
 package com.school.studentms.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +27,7 @@ public class OrganizationDTO {
 	
 	private List<UserDTO> users;
 
-	private Date createdOn;
+	private LocalDateTime createdOn;
 	
 	
 }

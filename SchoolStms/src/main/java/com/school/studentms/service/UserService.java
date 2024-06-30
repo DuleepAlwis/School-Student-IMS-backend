@@ -1,5 +1,7 @@
 package com.school.studentms.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,8 @@ public class UserService {
 			User ue = new User();
 			if (userRepository.getUserByEmail(user.getEmail()) == null) {
 				user.setPassword(PasswordUtility.generatePassword(user.getPassword()));
+				user.setIsActive('Y');
+				user.setCreatedOn(LocalDateTime.now());
 				ue = modelMapper.modelMapper().map(user, User.class);
 				user = modelMapper.modelMapper().map(userRepository.save(ue), UserDTO.class);
 			} else {

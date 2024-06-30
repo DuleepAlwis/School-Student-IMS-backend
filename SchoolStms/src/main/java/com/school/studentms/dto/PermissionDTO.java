@@ -1,14 +1,9 @@
 package com.school.studentms.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.school.studentms.entity.Role;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +20,6 @@ public class PermissionDTO {
 
 	private Role role;
 
-	private Date createdOn;
+	private LocalDateTime createdOn;
 	
 }

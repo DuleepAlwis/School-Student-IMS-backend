@@ -1,7 +1,7 @@
 package com.school.studentms.entity;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	private String mobile;
 	
 	@Column(name="is_active")
-	private boolean isActive;
+	private char isActive;
 	
 	@Column(name="country")
 	private String country;
@@ -51,11 +51,11 @@ public class User implements UserDetails {
 	private String password;
 
 	@Column(name="created_on")
-	private Date createdOn;
+	private LocalDateTime createdOn;
 
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return (Collection<? extends GrantedAuthority>) List.of(userRole);
+        return List.of();
     }
 
     @Override
@@ -82,6 +82,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return password;
+	}
 	
 	
 	
