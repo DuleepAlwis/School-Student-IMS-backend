@@ -1,6 +1,6 @@
 package com.school.studentms.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -28,14 +29,14 @@ public class Role {
 	@Column(name="is_active")
 	private boolean isActive;
 
-	@OneToMany(mappedBy="rolePermission")
+	@ManyToMany(mappedBy="rolePermission")
 	private List<Permission> permissions;
 
 	@OneToMany(mappedBy="userRole")
 	private List<User> users;
 
 	@Column(name="created_on")
-	private Date createdOn;
+	private LocalDateTime createdOn;
 	
 	
 	

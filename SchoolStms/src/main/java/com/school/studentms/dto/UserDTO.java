@@ -1,6 +1,6 @@
 package com.school.studentms.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -19,7 +19,7 @@ public class UserDTO {
 
 	private String mobile;
 
-	private boolean isActive;
+	private char isActive;
 
 	private String country;
 
@@ -31,5 +31,5 @@ public class UserDTO {
 	@NotEmpty(message="Password is required")
 	private String password; 
 	
-	private Date createdOn;
+	private LocalDateTime createdOn;
 }

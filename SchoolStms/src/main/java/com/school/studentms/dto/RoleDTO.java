@@ -1,10 +1,8 @@
 package com.school.studentms.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.school.studentms.entity.Permission;
-import com.school.studentms.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +21,6 @@ public class RoleDTO {
 
 	private List<UserDTO> users;
 
-	private Date createdOn;
+	private LocalDateTime createdOn;
 	
 }
