@@ -7,6 +7,7 @@ public interface UserService {
 
     public long createUser(UserDTO user);
     public UserDTO getUserById(long id);
+    public UserDTO getUserByEmail(String email);
     public long updateUser(UserDTO ue);
     public long changePassword(UserDTO ue);
     public long sendPasswordResetEmail(String email);

@@ -29,4 +29,6 @@ public class OrganizationEntity {
 
     private String email;
 
+    private String profilePic;
+
 }

@@ -1,5 +1,6 @@
 package com.school.studentms.controller;
 
+import com.school.studentms.constants.RestEndPoints;
 import com.school.studentms.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ import com.school.studentms.service.ServiceImpl.UserServiceImpl;
 
 import jakarta.validation.Valid;
 
-@RequestMapping(value="/auth")
+@RequestMapping(value=RestEndPoints.AUTH_CREATE_USER)
 @RestController
 public class AuthController {
 
@@ -31,7 +32,7 @@ public class AuthController {
 	@Autowired
 	private JwtService jwtService;
 
-	@PostMapping(value = "/create")
+	@PostMapping(value = RestEndPoints.AUTH_CREATE_USER_EP)
 	public ResponseEntity<ResponseDTO> create(@Valid @RequestBody UserDTO user, BindingResult result) {
 		ResponseDTO response = new ResponseDTO();
 
@@ -58,7 +59,7 @@ public class AuthController {
 		}
 	}
 
-	@PostMapping(value="/login")
+	@PostMapping(value=RestEndPoints.AUTH_LOGIN_EP)
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody LoginDTO loginDTO,BindingResult result) {
 		TokenDTO token = new TokenDTO();
 		if (result.hasErrors()) {

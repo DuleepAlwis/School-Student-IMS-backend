@@ -110,6 +110,7 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 
+	@Override
 	@Transactional
 	public UserDTO getUserByEmail(String email) {
 		UserDTO userDTO = new UserDTO();

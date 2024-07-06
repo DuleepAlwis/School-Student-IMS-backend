@@ -3,6 +3,8 @@ package com.school.studentms.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,5 +31,9 @@ public class OrganizationDTO {
 
 	private LocalDateTime createdOn;
 	
-	
+	private String profilePic;
+
+	@NotEmpty(message = "Email is required")
+	@Pattern(regexp = "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,4}$", message = "Email should be valid")
+	private String email;
 }
