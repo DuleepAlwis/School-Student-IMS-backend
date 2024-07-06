@@ -2,7 +2,6 @@ package com.school.studentms.dto;
 
 import java.time.LocalDateTime;
 
-import com.school.studentms.entity.Role;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ public class PermissionDTO {
 	
 	private boolean isActive;
 
-	private Role role;
+	private long role;
 
 	private LocalDateTime createdOn;
 	

@@ -1,3 +1,4 @@
+/*
 package com.school.studentms.entity;
 
 import java.time.LocalDateTime;
@@ -93,3 +94,4 @@ public class User implements UserDetails {
 	
 
 }
+*/

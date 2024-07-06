@@ -1,5 +1,6 @@
 package com.school.studentms.controller;
 
+import com.school.studentms.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,8 @@ import com.school.studentms.dto.LoginDTO;
 import com.school.studentms.dto.ResponseDTO;
 import com.school.studentms.dto.TokenDTO;
 import com.school.studentms.dto.UserDTO;
-import com.school.studentms.entity.User;
 import com.school.studentms.exception.TransactionFailedException;
-import com.school.studentms.service.UserService;
+import com.school.studentms.service.ServiceImpl.UserServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 public class AuthController {
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@Autowired
 	private JwtService jwtService;
@@ -42,8 +42,8 @@ public class AuthController {
 
 		} else {
 			try {
-				user = userService.createUser(user);
-				if (user != null) {
+				long res = userService.createUser(user);
+				if (res>0) {
 					response.setStatus(true);
 					response.setMessage(ResponseMessage.USER_CREATION_SUCCESS);
 					return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -68,7 +68,7 @@ public class AuthController {
 
 		}else {
 			try {
-				User authenticatedUser = userService.login(loginDTO.getEmail(), loginDTO.getPassword());
+				UserDTO authenticatedUser = userService.login(loginDTO.getEmail(), loginDTO.getPassword());
 		        String jwtToken = jwtService.generateToken(authenticatedUser);
 		        token.setEmail(loginDTO.getEmail());
 		        token.setStatus(true);

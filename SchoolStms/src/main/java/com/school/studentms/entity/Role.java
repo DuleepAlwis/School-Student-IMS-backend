@@ -1,3 +1,4 @@
+/*
 package com.school.studentms.entity;
 
 import java.time.LocalDateTime;
@@ -43,3 +44,4 @@ public class Role {
 	
 	
 }
+*/
