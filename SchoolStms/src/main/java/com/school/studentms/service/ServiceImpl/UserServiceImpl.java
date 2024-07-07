@@ -14,7 +14,7 @@ import com.school.studentms.dto.UserDTO;
 import com.school.studentms.entity.UserEntity;
 import com.school.studentms.exception.TransactionFailedException;
 import com.school.studentms.utility.ModelMapperConfig;
-import com.school.studentms.utility.PasswordUtility;
+import com.school.studentms.utility.ApplicationUtility;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			// Perform your transactional operations here
 			UserEntity ue = new UserEntity();
 			if (userDAO.getUserByEmail(user.getEmail()) == null) {
-				user.setPassword(PasswordUtility.generatePassword(user.getPassword()));
+				user.setPassword(ApplicationUtility.generatePassword(user.getPassword()));
 				user.setIsActive("Y");
 				user.setCreatedOn(LocalDateTime.now());
 				ue = modelMapper.modelMapper().map(user, UserEntity.class);
@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			 user = userDAO.getUserByEmail(email);
 
-			if(user!=null && PasswordUtility.passwordMatches(password,user.getPassword())) {
+			if(user!=null && ApplicationUtility.passwordMatches(password,user.getPassword())) {
 				userDTO = modelMapper.modelMapper().map(user, UserDTO.class);
 				userDTO.setPassword("");
 				logger.info("User login success {}",email);

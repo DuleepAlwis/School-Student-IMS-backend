@@ -6,12 +6,11 @@ import com.school.studentms.dao.OrganizationDAO;
 import com.school.studentms.dto.OrganizationDTO;
 import com.school.studentms.dto.UserDTO;
 import com.school.studentms.entity.OrganizationEntity;
-import com.school.studentms.entity.UserEntity;
 import com.school.studentms.exception.TransactionFailedException;
 import com.school.studentms.service.OrganizationService;
 import com.school.studentms.service.UserService;
 import com.school.studentms.utility.ModelMapperConfig;
-import com.school.studentms.utility.PasswordUtility;
+import com.school.studentms.utility.ApplicationUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +47,16 @@ public class OrganizationServiceImpl implements OrganizationService {
         long resultOrg = 0;
         long resultUser = 0;
         try{
-            if(organizationDAO.getOrganizationByEmail(org.getEmail()).getId()>0){
+            if(organizationDAO.getOrganizationByEmail(org.getEmail()).getId()==0){
                 org.setCreatedOn(LocalDateTime.now());
+                org.setOrgCode(ApplicationUtility.generateOrgCode(org.getOrgName()));
                 OrganizationEntity organizationEntity = modelMapperConfig.modelMapper().map(org,OrganizationEntity.class);
                 resultOrg = organizationDAO.createOrganization(organizationEntity);
                 logger.info("Organization successfully created {}",org.getEmail());
-                if(resultOrg>0 && userService.getUserByEmail(org.getEmail())==null){
+                if(resultOrg>0){
                     UserDTO userDTO = new UserDTO();
-                    String tmpPassword = new Timestamp(new Date().getTime())+org.getEmail().substring(0,org.getEmail().indexOf('@'));
-                    userDTO.setPassword(PasswordUtility.generatePassword(tmpPassword));
+                    String tmpPassword = ApplicationUtility.generateTmpPassword(org.getEmail());
+                    userDTO.setPassword(ApplicationUtility.generatePassword(tmpPassword));
                     userDTO.setEmail(org.getEmail());
                     userDTO.setCreatedOn(LocalDateTime.now());
                     userDTO.setIsActive("Y");

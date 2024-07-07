@@ -1,7 +1,6 @@
 package com.school.studentms.controller;
 
 import com.school.studentms.constants.RestEndPoints;
-import com.school.studentms.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import com.school.studentms.service.ServiceImpl.UserServiceImpl;
 
 import jakarta.validation.Valid;
 
-@RequestMapping(value=RestEndPoints.AUTH_CREATE_USER)
+@RequestMapping(value=RestEndPoints.AUTH_EP)
 @RestController
 public class AuthController {
 
