@@ -9,4 +9,5 @@ public class ClassRoomEntity {
     private String code;
     private String location;
     private int capacity;
+    private int orgId;
 }

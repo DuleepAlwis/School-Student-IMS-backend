@@ -50,6 +50,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             if(organizationDAO.getOrganizationByEmail(org.getEmail()).getId()==0){
                 org.setCreatedOn(LocalDateTime.now());
                 org.setOrgCode(ApplicationUtility.generateOrgCode(org.getOrgName()));
+                org.setIsActive("Y");
                 OrganizationEntity organizationEntity = modelMapperConfig.modelMapper().map(org,OrganizationEntity.class);
                 resultOrg = organizationDAO.createOrganization(organizationEntity);
                 logger.info("Organization successfully created {}",org.getEmail());

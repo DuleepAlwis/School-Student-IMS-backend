@@ -31,4 +31,6 @@ public class OrganizationEntity {
 
     private String profilePic;
 
+    private String country;
+
 }

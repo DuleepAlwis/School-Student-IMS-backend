@@ -25,13 +25,15 @@ public class OrganizationDTO {
 	
 	private String orgCode;
 
-	private boolean isActive;
+	private String isActive;
 	
 	private List<UserDTO> users;
 
 	private LocalDateTime createdOn;
 	
 	private String profilePic;
+
+	private String country;
 
 	@NotEmpty(message = "Email is required")
 	@Pattern(regexp = "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,4}$", message = "Email should be valid")
