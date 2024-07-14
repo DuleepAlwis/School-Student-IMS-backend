@@ -14,6 +14,7 @@ import com.school.studentms.utility.ApplicationUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
     private MailSenderService mailSenderService;
 
+    @Value("${fronend.url}")
+    private String appFrontend;
     private static final Logger logger = LogManager.getLogger(OrganizationServiceImpl.class);
 
     @Override
@@ -63,8 +66,8 @@ public class OrganizationServiceImpl implements OrganizationService {
                     userDTO.setIsActive("Y");
                     userDTO.setUserRole(Role.ORG_ADMIN.getIndex());
                     resultUser = userService.createUser(userDTO);
-                    String emailBody = "<h3>Hi user</h3><p>Your user account has been creadted and your organization succeccfully registered in our system."+
-                            "Use this tempory password to login to the system and change your password. Tempory password : <b>"+tmpPassword+"</b>";
+                    String emailBody = "<h3>Dear user</h3><p>Your user account has been creadted and your organization succeccfully registered in our system."+
+                            "Use this tempory password to login to the system and change your password. Tempory password : <b>"+tmpPassword+"</b>"+"<br/>Url : <b>"+appFrontend+"</b>";
                     mailSenderService.sendNewMail(org.getEmail(),ResponseMessage.USER_ACCOUNT_CREATED,emailBody);
                     if(resultUser>0){
                         return resultUser+resultOrg;
