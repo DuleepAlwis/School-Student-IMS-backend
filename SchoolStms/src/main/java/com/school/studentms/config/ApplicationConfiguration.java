@@ -2,6 +2,9 @@ package com.school.studentms.config;
 
 import java.util.Optional;
 
+import com.school.studentms.dao.UserDAO;
+import com.school.studentms.service.ServiceImpl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,15 +15,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.school.studentms.entity.User;
-import com.school.studentms.repository.AuthRepository;
+//import com.school.studentms.repository.AuthRepository;
 
 @Configuration
 public class ApplicationConfiguration {
-	private final AuthRepository authRepository;
+	//private final AuthRepository authRepository;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 
-	public ApplicationConfiguration(AuthRepository authRepository) {
-		this.authRepository = authRepository;
+	public ApplicationConfiguration(UserServiceImpl userServiceImpl) {
+		this.userServiceImpl= userServiceImpl;
 	}
 
 	/*
@@ -37,7 +41,7 @@ public class ApplicationConfiguration {
 		 * Optional.ofNullable(authRepository.getUserByEmail(username)) .orElseThrow(()
 		 * -> new UsernameNotFoundException("User not found"));
 		 */
-		return username -> authRepository.getUserByEmail(username);
+		return username -> userServiceImpl.getUserByEmail(username);
     }
 
 	@Bean

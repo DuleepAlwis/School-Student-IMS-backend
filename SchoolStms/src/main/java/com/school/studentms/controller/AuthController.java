@@ -1,5 +1,6 @@
 package com.school.studentms.controller;
 
+import com.school.studentms.constants.RestEndPoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,23 +16,22 @@ import com.school.studentms.dto.LoginDTO;
 import com.school.studentms.dto.ResponseDTO;
 import com.school.studentms.dto.TokenDTO;
 import com.school.studentms.dto.UserDTO;
-import com.school.studentms.entity.User;
 import com.school.studentms.exception.TransactionFailedException;
-import com.school.studentms.service.UserService;
+import com.school.studentms.service.ServiceImpl.UserServiceImpl;
 
 import jakarta.validation.Valid;
 
-@RequestMapping(value="/auth")
+@RequestMapping(value=RestEndPoints.AUTH_EP)
 @RestController
 public class AuthController {
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@Autowired
 	private JwtService jwtService;
 
-	@PostMapping(value = "/create")
+	@PostMapping(value = RestEndPoints.AUTH_CREATE_USER_EP)
 	public ResponseEntity<ResponseDTO> create(@Valid @RequestBody UserDTO user, BindingResult result) {
 		ResponseDTO response = new ResponseDTO();
 
@@ -42,8 +42,8 @@ public class AuthController {
 
 		} else {
 			try {
-				user = userService.createUser(user);
-				if (user != null) {
+				long res = userService.createUser(user);
+				if (res>0) {
 					response.setStatus(true);
 					response.setMessage(ResponseMessage.USER_CREATION_SUCCESS);
 					return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -58,7 +58,7 @@ public class AuthController {
 		}
 	}
 
-	@PostMapping(value="/login")
+	@PostMapping(value=RestEndPoints.AUTH_LOGIN_EP)
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody LoginDTO loginDTO,BindingResult result) {
 		TokenDTO token = new TokenDTO();
 		if (result.hasErrors()) {
@@ -68,7 +68,7 @@ public class AuthController {
 
 		}else {
 			try {
-				User authenticatedUser = userService.login(loginDTO.getEmail(), loginDTO.getPassword());
+				UserDTO authenticatedUser = userService.login(loginDTO.getEmail(), loginDTO.getPassword());
 		        String jwtToken = jwtService.generateToken(authenticatedUser);
 		        token.setEmail(loginDTO.getEmail());
 		        token.setStatus(true);

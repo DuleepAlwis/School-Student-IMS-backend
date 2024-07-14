@@ -1,3 +1,4 @@
+/*
 package com.school.studentms.entity;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class Organization {
 	
 	@Column(name="address")
 	private String address;
-	
+
 	@Column(name="district")
 	private String district;
 	
@@ -51,3 +52,4 @@ public class Organization {
 	
 	
 }
+*/
