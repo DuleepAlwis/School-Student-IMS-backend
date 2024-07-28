@@ -131,8 +131,8 @@ public class UserServiceImpl implements UserService {
 			throw new TransactionFailedException("Transaction failed: " + e.getMessage());
 		}
 	}
-	
-	@Transactional
+
+	@Transactional(rollbackFor = { Exception.class })
 	public UserDTO login(String email,String password) {
 		UserEntity user = new UserEntity();
 		UserDTO userDTO = null;

@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers( RestEndPoints.AUTH_EP).permitAll()
+                                .requestMatchers( RestEndPoints.AUTH_EP+RestEndPoints.AUTH_LOGIN_EP).permitAll()
                                 .requestMatchers( RestEndPoints.ORGANIZATION_EP+RestEndPoints.ORGANIZATION_CREATE).permitAll()
                                 .anyRequest().authenticated()
                 )
