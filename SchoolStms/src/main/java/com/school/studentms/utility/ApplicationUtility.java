@@ -1,5 +1,8 @@
 package com.school.studentms.utility;
 
+import com.school.studentms.service.ServiceImpl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
@@ -7,6 +10,8 @@ import java.time.Instant;
 import java.util.Random;
 
 public class ApplicationUtility {
+
+	private static final Logger logger = LogManager.getLogger(ApplicationUtility.class);
 
 	private final static String chars = "abcdefghijklmnopqrztyz";
 	private final static String specialChars = "!@#$%^&*()_-+=";
@@ -19,7 +24,9 @@ public class ApplicationUtility {
 	
 	public static boolean passwordMatches(String rawPassword,String hashPassword) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		return passwordEncoder.matches(rawPassword, hashPassword);
+		boolean result =  passwordEncoder.matches(rawPassword, hashPassword);
+		logger.info("Password matches {}",result);
+		return result;
 	}
 
 	public static String generateOrgCode(String orgName){

@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			// Perform your transactional operations here
 			UserEntity ue = new UserEntity();
 			if (userDAO.getUserByEmail(user.getEmail()) == null) {
-				user.setPassword(ApplicationUtility.generatePassword(user.getPassword()));
+				user.setPassword((user.getPassword()));
 				user.setIsActive("Y");
 				user.setCreatedOn(LocalDateTime.now());
 				ue = modelMapper.modelMapper().map(user, UserEntity.class);

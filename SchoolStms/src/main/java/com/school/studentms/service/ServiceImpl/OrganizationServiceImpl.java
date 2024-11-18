@@ -50,6 +50,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         long resultOrg = 0;
         long resultUser = 0;
         try{
+            logger.info("org dto {}",org.toString());
             if(organizationDAO.getOrganizationByEmail(org.getEmail()).getId()==0){
                 org.setCreatedOn(LocalDateTime.now());
                 org.setOrgCode(ApplicationUtility.generateOrgCode(org.getOrgName()));
@@ -66,8 +67,9 @@ public class OrganizationServiceImpl implements OrganizationService {
                     userDTO.setIsActive("Y");
                     userDTO.setUserRole(Role.ORG_ADMIN.getIndex());
                     resultUser = userService.createUser(userDTO);
-                    String emailBody = "<h3>Dear user</h3><p>Your user account has been creadted and your organization succeccfully registered in our system."+
-                            "Use this tempory password to login to the system and change your password. Tempory password : <b>"+tmpPassword+"</b>"+"<br/>Url : <b>"+appFrontend+"</b>";
+                    logger.info("TMP PASSWORD {}",tmpPassword);
+                    String emailBody = "<h3>Dear user</h3><p>Your user account has been created and your organization successfully registered in our system."+
+                            "Use this tempory password to login to the system and change your password. Temporary password : <b>"+tmpPassword+"</b>"+"<br/>Url : <b>"+appFrontend+"</b>";
                     mailSenderService.sendNewMail(org.getEmail(),ResponseMessage.USER_ACCOUNT_CREATED,emailBody);
                     if(resultUser>0){
                         return resultUser+resultOrg;
